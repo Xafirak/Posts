@@ -7,25 +7,25 @@ const initialState = {
 };
 
 const postsSlice = createSlice({
-    name: 'users',
+    name: 'posts',
     initialState,
     reducers: {
-        setUsers(state, action) {
+        setPosts(state, action) {
             state.posts = action.payload;
             state.isLoading = false
         },
-        setIsLoading(state, action) {
+        setIsLoadingPosts(state, action) {
             state.isLoading = action.payload;
         },
-        setError(state, action) {
+        setErrorPosts(state, action) {
             state.error = action.payload;
         },
     },
 });
 
 
-export const FETCH_USERS = 'FETCH_USERS'
-export const fetchAllUsers = () => ({ type: 'FETCH_USERS' });
-export const { setUsers, setIsLoading, setError } = postsSlice.actions;
+export const FETCH_POSTS = 'FETCH_POSTS'
+export const fetchAllPosts = () => ({ type: 'FETCH_POSTS' });
+export const { setPosts, setIsLoadingPosts, setErrorPosts } = postsSlice.actions;
 
 export default postsSlice.reducer;

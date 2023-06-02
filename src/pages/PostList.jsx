@@ -1,15 +1,35 @@
 import React from 'react';
+import Accordion from 'react-bootstrap/esm/Accordion';
+import Card from 'react-bootstrap/esm/Card';
+import Comments from '../components/Comments';
 import userLogo from '../images/user.png';
 
-
 //TODO  make styles
-const PostList = ({ post }) => {
+const PostList = ({ post, comments }) => {
+    console.log(comments);
     return (
         <div className="">
-            <h2>{post.title}</h2>
-            <img style={{width:'50px', height:'50px'}} src={userLogo} alt="" />
-            <div className="body">{post.body}</div>
-            <div className="comments">comments</div>
+            <Card>
+                <Card.Body>
+                    <img
+                        style={{ width: '50px', height: '50px' }}
+                        src={userLogo}
+                        alt=""
+                    />
+                    <Card.Title>
+                        <b>Title: {post.title}</b>
+                    </Card.Title>
+                    <Card.Text>{post.body}</Card.Text>
+                </Card.Body>
+                <Accordion>
+                    <Accordion.Item eventKey="1">
+                        <Accordion.Header>Comments</Accordion.Header>
+                        {comments.map((comment) => (
+                            <Comments comment={comment} />
+                        ))}
+                    </Accordion.Item>
+                </Accordion>
+            </Card>
         </div>
     );
 };

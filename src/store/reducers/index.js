@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import postsSlice from './posts/PostsSlice';
+import CommentsSlice from './posts/CommentsSlice';
+import PostsSlice from './posts/PostsSlice';
 
 export const rootReducer = combineReducers({
-    posts: postsSlice,
+    posts: PostsSlice,
+    comments: CommentsSlice,
 });

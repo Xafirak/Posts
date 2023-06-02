@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects';
-import { usersWatcher } from './usersSaga';
+import { fetchCommentsWatcher } from './commentsSaga';
+import { postsWatcher } from './postsSaga';
 
 export function* rootWatcher() {
-    yield all([usersWatcher()]);
+    yield all([postsWatcher(), fetchCommentsWatcher()]);
 }
