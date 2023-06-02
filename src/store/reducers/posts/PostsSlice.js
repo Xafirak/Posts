@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     posts: [],
-    isLoading: false,
+    isLoading: true,
     error: '',
 };
 
@@ -12,6 +12,7 @@ const postsSlice = createSlice({
     reducers: {
         setUsers(state, action) {
             state.posts = action.payload;
+            state.isLoading = false
         },
         setIsLoading(state, action) {
             state.isLoading = action.payload;
@@ -22,6 +23,8 @@ const postsSlice = createSlice({
     },
 });
 
+
+export const FETCH_USERS = 'FETCH_USERS'
 export const fetchAllUsers = () => ({ type: 'FETCH_USERS' });
 export const { setUsers, setIsLoading, setError } = postsSlice.actions;
 

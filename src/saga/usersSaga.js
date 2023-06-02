@@ -1,15 +1,20 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { fetchAllUsers, setUsers } from '../store/reducers/posts/PostsSlice';
+import {
+    FETCH_USERS,
+    setError,
+    setUsers,
+} from '../store/reducers/posts/PostsSlice';
 import { getUsers } from './../api/fetchUsers';
 
-const delay = () => new Promise((res) => setTimeout(res, 5000));
-
 function* fetchUsersWorker() {
-    yield delay();
-    const data = yield call(getUsers);
-    yield put(setUsers(data));
+    try {
+        const data = yield call(getUsers);
+        yield put(setUsers(data));
+    } catch (err) {
+        yield put(setError(err));
+    }
 }
 
 export function* usersWatcher() {
-    yield takeEvery(fetchAllUsers, fetchUsersWorker);
+    yield takeEvery(FETCH_USERS, fetchUsersWorker);
 }

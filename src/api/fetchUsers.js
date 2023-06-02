@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { setUsers } from '../store/reducers/posts/PostsSlice';
 
 export const getUsers = async () => {
     return await axios
