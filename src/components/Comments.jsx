@@ -1,13 +1,14 @@
-import React from 'react';
-import Accordion from 'react-bootstrap/esm/Accordion';
+import React, { useEffect } from 'react';
 import Card from 'react-bootstrap/esm/Card';
 
-const Comments = ({comment}) => {
+const Comments = ({ id, comments }) => {
+    //   console.log(comments);
     return (
-        <Accordion.Body>
-            <Card.Title>{comment.email}</Card.Title>
-            {comment.body}
-        </Accordion.Body>
+        <div>
+            {id}
+            {/* <Card.Title>{comment.email}</Card.Title>
+            {comment.body} */}
+        </div>
     );
 };
 

@@ -1,17 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    comments: [],
+    allComments: [],
     isLoading: true,
     error: '',
 };
 
 const UsersSlice = createSlice({
-    name: 'coments',
+    name: 'comments',
     initialState,
     reducers: {
+        // setCommentId(state, action) {
+        //     state.comments = action.payload;
+        //     state.isLoading = false;
+        // },
         setComments(state, action) {
-            state.comments = action.payload;
+            state.allComments.push(...action.payload);
             state.isLoading = false;
         },
         setIsLoadingComments(state, action) {
@@ -23,8 +27,9 @@ const UsersSlice = createSlice({
     },
 });
 
-export const FETCH_COMMENTS = 'FETCH_COMMENTS';
-export const fetchAllComments = () => ({ type: 'FETCH_COMMENTS' });
+export const GET_COMMENT_ID = 'GET_COMMENT_ID';
+export const getCommentId = (payload) => ({ type: 'GET_COMMENT_ID', payload });
+export const fetchComments = (payload) => ({ type: 'FETCH_COMMENTS', payload });
 export const { setComments, setIsLoadingComments, setErrorComments } =
     UsersSlice.actions;
 

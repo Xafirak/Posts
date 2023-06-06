@@ -1,20 +1,20 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { getComments } from '../api/fetchComments';
 import {
-    FETCH_COMMENTS,
+    GET_COMMENT_ID,
     setComments,
     setErrorComments,
 } from './../store/reducers/posts/CommentsSlice';
 
-function* fetchCommentsWorker() {
+function* commentsWorker(action) {
     try {
-        const posts = yield call(getComments);
+        const posts = yield call(getComments, action.payload);
         yield put(setComments(posts));
     } catch (err) {
         yield put(setErrorComments(err));
     }
 }
 
-export function* fetchCommentsWatcher() {
-    yield takeEvery(FETCH_COMMENTS, fetchCommentsWorker);
+export function* commentsWatcher() {
+    yield takeEvery(GET_COMMENT_ID, commentsWorker);
 }
