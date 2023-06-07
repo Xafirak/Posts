@@ -25,7 +25,6 @@ const UsersSlice = createSlice({
 
 export const GET_COMMENT_ID = 'GET_COMMENT_ID';
 export const getCommentId = (payload) => ({ type: 'GET_COMMENT_ID', payload });
-export const fetchComments = (payload) => ({ type: 'FETCH_COMMENTS', payload });
 export const { setComments, setIsLoadingComments, setErrorComments } =
     UsersSlice.actions;
 
