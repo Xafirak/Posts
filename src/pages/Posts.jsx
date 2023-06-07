@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../components/Loader';
 import { fetchAllPosts } from '../store/reducers/posts/PostsSlice';
 import PostList from './PostList';
 
@@ -20,7 +21,7 @@ const Posts = () => {
             {isLoading === false ? (
                 posts.map((post) => <PostList key={post.id} post={post} />)
             ) : (
-                <h2>Loading...</h2>
+                <Loader />
             )}
         </div>
     );

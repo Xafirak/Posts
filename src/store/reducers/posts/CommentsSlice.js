@@ -10,10 +10,6 @@ const UsersSlice = createSlice({
     name: 'comments',
     initialState,
     reducers: {
-        // setCommentId(state, action) {
-        //     state.comments = action.payload;
-        //     state.isLoading = false;
-        // },
         setComments(state, action) {
             state.allComments.push(...action.payload);
             state.isLoading = false;
