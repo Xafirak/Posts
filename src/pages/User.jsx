@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser } from '../store/reducers/data/UserSlice';
+import { fetchUser, fetchUserPosts } from '../store/reducers/data/UserSlice';
 import Card from 'react-bootstrap/esm/Card';
 import ListGroup from 'react-bootstrap/esm/ListGroup';
 import { Button } from 'react-bootstrap';
@@ -12,26 +12,27 @@ const User = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const userInfo = useSelector((state) => state.user.user);
-    const isUserLoading = useSelector((state) => state.user.isLoading);
+    const isUserLoading = useSelector((state) => state.user.isUserLoading);
+    const isPostsAreLoading = useSelector((state) => state.user.isPostsLoading);
+    const userPosts = useSelector((state) => state.user.userPosts);
     const nav = useNavigate();
 
     useEffect(() => {
-        dispatch(fetchUser(id));
-    }, [id]);
+        setTimeout(() => {
+            dispatch(fetchUser(id));
+            dispatch(fetchUserPosts(id));
+        }, 500);
+    }, []);
 
-    console.log(id);
     console.log(userInfo);
+    console.log(userPosts);
     return (
         <div>
-            {isUserLoading === false ? (
+            {isUserLoading === false && isPostsAreLoading === false ? (
                 <div>
                     <Button onClick={() => nav(-1)}>Back</Button>
-                    <h2>User info</h2>
+                    <h2 style={{ textAlign: 'center' }}>User Info</h2>
                     <Card style={{ margin: '10px', width: '1000px' }}>
-                        <Card.Img
-                            variant="top"
-                            src="holder.js/100px180?text=Image cap"
-                        />
                         <Card.Body>
                             <Card.Title>
                                 <h1>{userInfo.name}</h1>
@@ -39,7 +40,6 @@ const User = () => {
                             <Card.Text>
                                 <b>Email</b>: {userInfo.email}
                             </Card.Text>
-                            <Card.Title></Card.Title>
                             <Card.Text>
                                 <b>Lives</b>: {userInfo.address.city}
                             </Card.Text>
@@ -47,11 +47,16 @@ const User = () => {
                                 <b>Working at</b>: {userInfo.company.name}
                             </Card.Text>
                         </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>All user posts</ListGroup.Item>
-                            {/* <PostList /> */}
-                        </ListGroup>
                     </Card>
+                    <ListGroup className="list-group-flush">
+                        <ListGroup.Item>
+                            <h4>All user posts</h4>
+
+                            {userPosts.map((post) => (
+                                <PostList key={post.id} post={post} />
+                            ))}
+                        </ListGroup.Item>
+                    </ListGroup>
                 </div>
             ) : (
                 <Loader />

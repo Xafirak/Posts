@@ -3,8 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     user: [],
     userPosts: [],
-    isLoading: true,
-    error: '',
+    isUserLoading: true,
+    isPostsLoading: true,
+    userError: '',
+    userPostsError: '',
 };
 
 const userSlice = createSlice({
@@ -13,17 +15,17 @@ const userSlice = createSlice({
     reducers: {
         setUser(state, action) {
             state.user = action.payload;
-            state.isLoading = false;
+            state.isUserLoading = false;
         },
         setUserPosts(state, action) {
             state.userPosts = action.payload;
-            state.isLoading = false;
-        },
-        setIsLoadingUser(state, action) {
-            state.isLoading = action.payload;
+            state.isPostsLoading = false;
         },
         setUserError(state, action) {
-            state.error = action.payload;
+            state.userError = action.payload;
+        },
+        setPostsError(state, action) {
+            state.userPostsError = action.payload;
         },
     },
 });
@@ -35,7 +37,7 @@ export const fetchUserPosts = (payload) => ({
     type: 'GET_USER_POSTS',
     payload,
 });
-export const { setUser, setIsLoadingUser, setUserError, setUserPosts } =
+export const { setUser, setUserError, setUserPosts, setPostsError } =
     userSlice.actions;
 
 export default userSlice.reducer;

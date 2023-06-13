@@ -30,7 +30,7 @@ const PostList = ({ post }) => {
 
     return (
         <div className="">
-            <Card>
+            <Card style={{marginTop:"10px"}}>
                 <Card.Body>
                     <img
                         onClick={() => navigateToUser()}

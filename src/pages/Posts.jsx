@@ -6,6 +6,7 @@ import Sorting from '../components/Sorting';
 import { fetchAllPosts } from '../store/reducers/data/PostsSlice';
 import PostList from '../components/PostList';
 import Paginatior from './../components/Pagination';
+import Card from 'react-bootstrap/Card';
 
 // Вопрос - надо ли  всю логику  писать в компонентах ()
 // (пример - Sorting или Search )  или нужно держать компоненты чистыми?
@@ -69,29 +70,31 @@ const Posts = () => {
     }
 
     return (
-        <div>
-            <h2 style={{ textAlign: 'center' }}>Posts</h2>
-            <Search
-                setPosts={setSearchedPosts}
-                setSortButtonName={setSortButtonName}
-            />
-            <Paginatior
-                currentPage={currentPage}
-                totalPosts={totalNumberOfPosts}
-                onPageChange={(page) => setCurrentPage(page)}
-                pageSize={pageSize}
-                nearNumbersCount={nearNumbersCount}
-            />
-            <Sorting
-                buttonName={sortButtonName}
-                setButtonName={setSortButtonName}
-            />
-            {isLoading === false ? (
-                posts.map((post) => <PostList key={post.id} post={post} />)
-            ) : (
-                <Loader />
-            )}
-        </div>
+        <Card>
+            <Card.Body>
+                <h2 style={{ textAlign: 'center' }}>Posts</h2>
+                <Search
+                    setPosts={setSearchedPosts}
+                    setSortButtonName={setSortButtonName}
+                />
+                <Paginatior
+                    currentPage={currentPage}
+                    totalPosts={totalNumberOfPosts}
+                    onPageChange={(page) => setCurrentPage(page)}
+                    pageSize={pageSize}
+                    nearNumbersCount={nearNumbersCount}
+                />
+                <Sorting
+                    buttonName={sortButtonName}
+                    setButtonName={setSortButtonName}
+                />
+                {isLoading === false ? (
+                    posts.map((post) => <PostList key={post.id} post={post} />)
+                ) : (
+                    <Loader />
+                )}
+            </Card.Body>
+        </Card>
     );
 };
 

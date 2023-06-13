@@ -3,7 +3,7 @@ import React from 'react';
 const AboutMe = () => {
     return (
         <div>
-            <h2>About me</h2>
+          <h2 style={{ textAlign: 'center' }}>About Me</h2>
         </div>
     );
 };
