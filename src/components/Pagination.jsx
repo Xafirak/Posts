@@ -16,10 +16,10 @@ const Paginator = ({
         pageSize,
     });
 
-    if (currentPage === 0 ) {
+    if (currentPage === 0) {
         return null;
     }
-    
+
     const onNext = () => {
         onPageChange(currentPage + 1);
     };

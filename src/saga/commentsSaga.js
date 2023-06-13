@@ -4,11 +4,11 @@ import {
     GET_COMMENT_ID,
     setComments,
     setErrorComments,
-} from './../store/reducers/posts/CommentsSlice';
+} from '../store/reducers/data/CommentsSlice';
 
 function* commentsWorker(action) {
     try {
-        yield delay(500)
+        yield delay(500);
         const posts = yield call(getComments, action.payload);
         yield put(setComments(posts));
     } catch (err) {

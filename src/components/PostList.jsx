@@ -3,31 +3,42 @@ import { useState } from 'react';
 import Accordion from 'react-bootstrap/esm/Accordion';
 import Card from 'react-bootstrap/esm/Card';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import Comments from '../components/Comments';
 import userLogo from '../images/user.png';
-import { getCommentId } from '../store/reducers/posts/CommentsSlice';
+import { getCommentId } from '../store/reducers/data/CommentsSlice';
 
-//TODO  make styles
 const PostList = ({ post }) => {
     const [clicked, setClicked] = useState(false);
     const dispatch = useDispatch();
-    // @ts-ignore
+    const navigate = useNavigate();
     const allComments = useSelector((state) => state.comments.allComments);
-    let postComments = allComments.filter(
+    const postComments = allComments.filter(
         (comment) => comment.postId === post.id
     );
+
     function handleComments() {
         if (!clicked) {
             setClicked(true);
             dispatch(getCommentId(post.id));
         }
     }
+
+    function navigateToUser() {
+        navigate(`/users/${post.userId}`);
+    }
+
     return (
         <div className="">
             <Card>
                 <Card.Body>
                     <img
-                        style={{ width: '50px', height: '50px' }}
+                        onClick={() => navigateToUser()}
+                        style={{
+                            width: '50px',
+                            height: '50px',
+                            cursor: 'pointer',
+                        }}
                         src={userLogo}
                         alt=""
                     />

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Search from '../components/Search';
 import Sorting from '../components/Sorting';
-import { fetchAllPosts } from '../store/reducers/posts/PostsSlice';
-import PostList from './PostList';
+import { fetchAllPosts } from '../store/reducers/data/PostsSlice';
+import PostList from '../components/PostList';
 import Paginatior from './../components/Pagination';
 
 // Вопрос - надо ли  всю логику  писать в компонентах ()
@@ -53,8 +53,6 @@ const Posts = () => {
 
     function sortingPosts(arrayOfPosts) {
         let sortedPosts = [...arrayOfPosts];
-        console.log(sortButtonName);
-
         if (sortButtonName === '') return;
         if (sortButtonName === 'From A to Z') {
             sortedPosts.sort((a, b) => {

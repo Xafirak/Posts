@@ -7,7 +7,7 @@ const Sorting = ({ buttonName, setButtonName }) => {
     }
     return (
         <DropdownButton
-            variant="outline-secondary"
+            variant="outline-primary"
             title={buttonName ? `${buttonName}` : 'Sort'}
             id="input-group-dropdown-1"
         >
