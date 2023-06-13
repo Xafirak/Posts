@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/esm/Form';
 import InputGroup from 'react-bootstrap/esm/InputGroup';
 import { useSelector } from 'react-redux';
 
-const Search = ({ setPosts }) => {
+const Search = ({ setPosts, setSortButtonName }) => {
     const inputRef = useRef();
     const allPosts = useSelector((state) => state.posts.posts);
     const [filteredComments, setFilteredComments] = useState([]);
@@ -17,12 +17,15 @@ const Search = ({ setPosts }) => {
         setPosts(filteredComments);
     }, [filteredComments]);
 
-    
     function handleSearch() {
-        if (inputRef.current.value.length > 0) {
+        let word = inputRef.current.value.trim();
+        if (word.length > 0) {
             let postComments = allPosts.filter((post) =>
-                post.title.includes(inputRef.current.value)
+                RegExp('\\b' + word + '\\b').test(post.title)
             );
+            // let postComments = allPosts.filter((post) =>
+            //     post.title.includes(word)
+            // );
             setFilteredComments((prev) => postComments);
         } else {
             setFilteredComments(allPosts);
@@ -32,6 +35,7 @@ const Search = ({ setPosts }) => {
     function clearInputHandler() {
         inputRef.current.value = '';
         setPosts(allPosts);
+        setSortButtonName('')
     }
 
     return (
@@ -43,7 +47,11 @@ const Search = ({ setPosts }) => {
             }}
         >
             <CloseButton onClick={() => clearInputHandler()} />
-            <Form.Control ref={inputRef} placeholder="Search post's title..." />
+            <Form.Control
+                onKeyDown={(e) => (e.key === 'Enter' ? handleSearch() : '')}
+                ref={inputRef}
+                placeholder="Search post's title..."
+            />
 
             <Button onClick={() => handleSearch()} variant="outline-secondary">
                 Search!

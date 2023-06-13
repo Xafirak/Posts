@@ -5,6 +5,7 @@ import Search from '../components/Search';
 import Sorting from '../components/Sorting';
 import { fetchAllPosts } from '../store/reducers/posts/PostsSlice';
 import PostList from './PostList';
+import Paginatior from './../components/Pagination';
 
 // Вопрос - надо ли  всю логику  писать в компонентах ()
 // (пример - Sorting или Search )  или нужно держать компоненты чистыми?
@@ -14,11 +15,13 @@ const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [searchedPosts, setSearchedPosts] = useState([]);
     const [sortButtonName, setSortButtonName] = useState('');
-    // @ts-ignore
+    const [currentPage, setCurrentPage] = useState(1);
     const allPosts = useSelector((state) => state.posts.posts);
-
-    // @ts-ignore
     const isLoading = useSelector((state) => state.posts.isLoading);
+    const totalNumberOfPosts =
+        searchedPosts.length > 0 ? searchedPosts.length : allPosts.length;
+    const pageSize = 10;
+    const nearNumbersCount = 1;
 
     useEffect(() => {
         setTimeout(() => {
@@ -27,26 +30,40 @@ const Posts = () => {
     }, []);
 
     useEffect(() => {
-        setPosts(allPosts);
-        setSortButtonName('');
-    }, [allPosts]);
+        const firstPageIndex = (currentPage - 1) * pageSize;
+        const lastPageIndex = firstPageIndex + pageSize;
+
+        if (searchedPosts.length > 0) {
+            let slicedPosts = searchedPosts.slice(
+                firstPageIndex,
+                lastPageIndex
+            );
+            setPosts(slicedPosts);
+            sortingPosts(slicedPosts);
+        } else {
+            let slicedPosts = allPosts.slice(firstPageIndex, lastPageIndex);
+            setPosts(slicedPosts);
+            sortingPosts(slicedPosts);
+        }
+    }, [allPosts, currentPage, searchedPosts]);
 
     useEffect(() => {
-        setPosts(searchedPosts);
-        setSortButtonName('');
-    }, [searchedPosts]);
+        sortingPosts(posts);
+    }, [sortButtonName]);
 
-    function sortingPosts(rule) {
-        let sortedPosts = [...posts];
-        if (rule === 'From A to Z') {
+    function sortingPosts(arrayOfPosts) {
+        let sortedPosts = [...arrayOfPosts];
+        console.log(sortButtonName);
+
+        if (sortButtonName === '') return;
+        if (sortButtonName === 'From A to Z') {
             sortedPosts.sort((a, b) => {
-                // @ts-ignore
                 return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
             });
             setPosts(sortedPosts);
-        } else {
+        }
+        if (sortButtonName === 'From Z to A') {
             sortedPosts.sort((a, b) => {
-                // @ts-ignore
                 return a.title < b.title ? 1 : a.title > b.title ? -1 : 0;
             });
             setPosts(sortedPosts);
@@ -56,11 +73,20 @@ const Posts = () => {
     return (
         <div>
             <h2 style={{ textAlign: 'center' }}>Posts</h2>
-            <Search setPosts={setSearchedPosts} />
+            <Search
+                setPosts={setSearchedPosts}
+                setSortButtonName={setSortButtonName}
+            />
+            <Paginatior
+                currentPage={currentPage}
+                totalPosts={totalNumberOfPosts}
+                onPageChange={(page) => setCurrentPage(page)}
+                pageSize={pageSize}
+                nearNumbersCount={nearNumbersCount}
+            />
             <Sorting
                 buttonName={sortButtonName}
                 setButtonName={setSortButtonName}
-                sortingPosts={sortingPosts}
             />
             {isLoading === false ? (
                 posts.map((post) => <PostList key={post.id} post={post} />)

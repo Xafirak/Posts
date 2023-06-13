@@ -32,7 +32,7 @@ const PostList = ({ post }) => {
                         alt=""
                     />
                     <Card.Title>
-                        <b>Title: {post.title}</b>
+                        <b> Title: {post.title}</b>
                     </Card.Title>
                     <Card.Text>{post.body}</Card.Text>
                 </Card.Body>
