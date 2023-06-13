@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 
-const Sorting = ({ buttonName, setButtonName, sortingPosts }) => {
+const Sorting = ({ buttonName, setButtonName }) => {
     function sortButtonHandler(e) {
         setButtonName(e.target.text);
-        sortingPosts(e.target.text);
     }
     return (
         <DropdownButton
