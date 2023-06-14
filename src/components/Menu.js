@@ -17,10 +17,12 @@ const Menu = () => {
                 <img src={menu} />
             </Dropdown.Toggle>
 
-            <Dropdown.Menu >
-                <Dropdown style={{ padding: '10px' }}>
+            <Dropdown.Menu style={{ backgroundColor: 'lightslategrey' }}>
+                <Dropdown
+                    style={{ padding: '10px'}}
+                >
                     <img
-                        style={{ width: '90px', height: '70px' }}
+                        style={{ width: '95px', height: '75px' }}
                         src={avatar}
                         alt="моя ава"
                     />

@@ -24,15 +24,18 @@ const User = () => {
         }, 500);
     }, []);
 
-    console.log(userInfo);
-    console.log(userPosts);
     return (
         <div>
             {isUserLoading === false && isPostsAreLoading === false ? (
                 <div>
-                    <Button onClick={() => nav(-1)}>Back</Button>
-                    <h2 style={{ textAlign: 'center' }}>User Info</h2>
-                    <Card style={{ margin: '10px', width: '1000px' }}>
+                    <Card>
+                        <Button
+                            style={{ width: '5em' }}
+                            onClick={() => nav(-1)}
+                        >
+                            Back
+                        </Button>
+                        <h2 style={{ textAlign: 'center' }}>User Info</h2>
                         <Card.Body>
                             <Card.Title>
                                 <h1>{userInfo.name}</h1>
@@ -46,17 +49,13 @@ const User = () => {
                             <Card.Text>
                                 <b>Working at</b>: {userInfo.company.name}
                             </Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <ListGroup className="list-group-flush">
-                        <ListGroup.Item>
                             <h4>All user posts</h4>
 
                             {userPosts.map((post) => (
                                 <PostList key={post.id} post={post} />
                             ))}
-                        </ListGroup.Item>
-                    </ListGroup>
+                        </Card.Body>
+                    </Card>
                 </div>
             ) : (
                 <Loader />

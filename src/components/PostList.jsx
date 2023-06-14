@@ -16,11 +16,18 @@ const PostList = ({ post }) => {
     const postComments = allComments.filter(
         (comment) => comment.postId === post.id
     );
-
+  
     function handleComments() {
-        if (!clicked) {
+        if (
+            postComments.length > 0 &&
+            postComments.map((comment) => comment.postId === post.id)
+        ) {
             setClicked(true);
-            dispatch(getCommentId(post.id));
+        } else {
+            if (!clicked) {
+                setClicked(true);
+                dispatch(getCommentId(post.id));
+            }
         }
     }
 
@@ -30,13 +37,13 @@ const PostList = ({ post }) => {
 
     return (
         <div className="">
-            <Card style={{marginTop:"10px"}}>
+            <Card style={{ marginTop: '1vh' }}>
                 <Card.Body>
                     <img
                         onClick={() => navigateToUser()}
                         style={{
-                            width: '50px',
-                            height: '50px',
+                            width: '3em',
+                            height: '3em',
                             cursor: 'pointer',
                         }}
                         src={userLogo}

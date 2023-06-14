@@ -42,7 +42,7 @@ const Search = ({ setPosts, setSortButtonName }) => {
         <InputGroup
             className="mb-3"
             style={{
-                width: '700px',
+                width: '100%',
                 alignItems: 'center',
             }}
         >
