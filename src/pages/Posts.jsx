@@ -7,6 +7,7 @@ import { fetchAllPosts } from '../store/reducers/data/PostsSlice';
 import PostList from '../components/PostList';
 import Paginatior from './../components/Pagination';
 import Card from 'react-bootstrap/Card';
+import ErrorMessage from './../components/ErrorMessage';
 
 // Вопрос - надо ли  всю логику  писать в компонентах ()
 // (пример - Sorting или Search )  или нужно держать компоненты чистыми?
@@ -19,6 +20,7 @@ const Posts = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const allPosts = useSelector((state) => state.posts.posts);
     const isLoading = useSelector((state) => state.posts.isLoading);
+    const postsError = useSelector((state) => state.posts.error);
     const totalNumberOfPosts =
         searchedPosts.length > 0 ? searchedPosts.length : allPosts.length;
     const pageSize = 10;
@@ -89,7 +91,13 @@ const Posts = () => {
                     setButtonName={setSortButtonName}
                 />
                 {isLoading === false ? (
-                    posts.map((post) => <PostList key={post.id} post={post} />)
+                    postsError.length === 0 ? (
+                        posts.map((post) => (
+                            <PostList key={post.id} post={post} />
+                        ))
+                    ) : (
+                        <ErrorMessage error={postsError} />
+                    )
                 ) : (
                     <Loader />
                 )}

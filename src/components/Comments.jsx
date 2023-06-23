@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import Accordion from 'react-bootstrap/esm/Accordion';
 import Card from 'react-bootstrap/esm/Card';
+import ErrorMessage from './ErrorMessage';
 import Loader from './Loader';
 
-const Comments = ({ comments }) => {
-   
+const Comments = ({ comments, error }) => {
     return (
         <Accordion.Body>
-            {comments.length > 1 ? (
-                comments.map((comment,index) => (
-                    <Card style={{padding:'1em'}} key={index}>
+            {error ? (
+                <ErrorMessage error={error} />
+            ) : comments.length > 1 ? (
+                comments.map((comment, index) => (
+                    <Card style={{ padding: '1em' }} key={index}>
                         <Card.Title>{comment.email}</Card.Title>
                         {comment.body}
                     </Card>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/esm/Accordion';
 import Card from 'react-bootstrap/esm/Card';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,16 +7,18 @@ import { useNavigate } from 'react-router';
 import Comments from '../components/Comments';
 import userLogo from '../images/user.png';
 import { getCommentId } from '../store/reducers/data/CommentsSlice';
+import ErrorMessage from './ErrorMessage';
 
 const PostList = ({ post }) => {
     const [clicked, setClicked] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allComments = useSelector((state) => state.comments.allComments);
+    const commentsError = useSelector((state) => state.comments.error);
     const postComments = allComments.filter(
         (comment) => comment.postId === post.id
     );
-  
+
     function handleComments() {
         if (
             postComments.length > 0 &&
@@ -59,7 +61,10 @@ const PostList = ({ post }) => {
                         <Accordion.Header onClick={() => handleComments()}>
                             Comments
                         </Accordion.Header>
-                        <Comments comments={postComments} />
+                        <Comments
+                            error={commentsError}
+                            comments={postComments}
+                        />
                     </Accordion.Item>
                 </Accordion>
             </Card>

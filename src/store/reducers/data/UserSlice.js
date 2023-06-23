@@ -17,15 +17,17 @@ const userSlice = createSlice({
             state.user = action.payload;
             state.isUserLoading = false;
         },
+        setUserError(state, action) {
+            state.userError = action.payload;
+            state.isUserLoading = false;
+        },
         setUserPosts(state, action) {
             state.userPosts = action.payload;
             state.isPostsLoading = false;
         },
-        setUserError(state, action) {
-            state.userError = action.payload;
-        },
-        setPostsError(state, action) {
+        setUserPostsError(state, action) {
             state.userPostsError = action.payload;
+            state.isPostsLoading = false;
         },
     },
 });
@@ -37,7 +39,7 @@ export const fetchUserPosts = (payload) => ({
     type: 'GET_USER_POSTS',
     payload,
 });
-export const { setUser, setUserError, setUserPosts, setPostsError } =
+export const { setUser, setUserError, setUserPosts, setUserPostsError } =
     userSlice.actions;
 
 export default userSlice.reducer;

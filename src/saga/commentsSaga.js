@@ -7,7 +7,7 @@ import {
 } from '../store/reducers/data/CommentsSlice';
 
 function* commentsWorker(action) {
-    try {
+    try {        
         yield delay(500);
         const posts = yield call(getComments, action.payload);
         yield put(setComments(posts));

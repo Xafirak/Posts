@@ -14,11 +14,9 @@ const postsSlice = createSlice({
             state.posts = action.payload;
             state.isLoading = false;
         },
-        setIsLoadingPosts(state, action) {
-            state.isLoading = action.payload;
-        },
         setErrorPosts(state, action) {
             state.error = action.payload;
+            state.isLoading = false;
         },
     },
 });
@@ -26,7 +24,10 @@ const postsSlice = createSlice({
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const SET_SEARCHED_POSTS = 'SET_SEARCHED_POSTS';
 export const fetchAllPosts = () => ({ type: 'FETCH_POSTS' });
-export const setSearchPosts = (payload) => ({ type: 'SET_SEARCHED_POSTS', payload });
+export const setSearchPosts = (payload) => ({
+    type: 'SET_SEARCHED_POSTS',
+    payload,
+});
 export const { setPosts, setIsLoadingPosts, setErrorPosts } =
     postsSlice.actions;
 

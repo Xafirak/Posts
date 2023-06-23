@@ -14,11 +14,9 @@ const UsersSlice = createSlice({
             state.allComments.push(...action.payload);
             state.isLoading = false;
         },
-        setIsLoadingComments(state, action) {
-            state.isLoading = action.payload;
-        },
         setErrorComments(state, action) {
             state.error = action.payload;
+            state.isLoading = false;
         },
     },
 });

@@ -3,7 +3,7 @@ import {
     setUser,
     setUserError,
     setUserPosts,
-    setPostsError,
+    setUserPostsError,
     GET_USER,
     GET_USER_POSTS,
 } from '../store/reducers/data/UserSlice';
@@ -14,6 +14,7 @@ function* userWorker(action) {
         const user = yield call(getUser, action.payload);
         yield put(setUser(user));
     } catch (err) {
+        console.log(err);
         yield put(setUserError(err));
     }
 }
@@ -21,10 +22,10 @@ function* userWorker(action) {
 function* userPostsWorker(action) {
     try {
         const userPosts = yield call(getUserPosts, action.payload);
-        
+
         yield put(setUserPosts(userPosts));
     } catch (err) {
-        yield put(setPostsError(err));
+        yield put(setUserPostsError(err));
     }
 }
 
