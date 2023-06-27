@@ -2,7 +2,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import React from 'react';
 import avatar from '../images/me.jpg';
 import menu from '../images/burger.png';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useState } from 'react';
 
 const Menu = () => {
@@ -45,36 +44,5 @@ const Menu = () => {
         </Dropdown>
     );
 };
-
-// return (
-//     <DropdownButton
-//         style={{ width: '150px', height: '150px' }}
-//         title={<img src={menu} />}
-//     >
-
-//         <Dropdown style={{ padding: '10px' }}>
-//             <img
-//                 style={{ width: '80px', height: '65px' }}
-//                 src={avatar}
-//                 alt="моя ава"
-//             />
-//             <div>Данил</div>
-//             <div
-//                 onClick={(e) => copy(e.target.innerText)}
-//                 style={{
-//                     padding: ' 0 3px',
-//                     cursor: 'pointer',
-//                     backgroundColor: 'lightgray',
-//                 }}
-//             >
-//                 bensala3@yandex.ru
-//             </div>
-//         </Dropdown>
-
-//         <Dropdown.Item href="/aboutme">About me</Dropdown.Item>
-//         <Dropdown.Item href="/">Posts list</Dropdown.Item>
-//     </DropdownButton>
-// );
-// };
 
 export default Menu;

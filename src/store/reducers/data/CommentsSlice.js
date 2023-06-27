@@ -1,4 +1,4 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     allComments: [],
@@ -23,7 +23,6 @@ const UsersSlice = createSlice({
 
 export const GET_COMMENT_ID = 'GET_COMMENT_ID';
 export const getCommentId = (payload) => ({ type: 'GET_COMMENT_ID', payload });
-export const { setComments, setIsLoadingComments, setErrorComments } =
-    UsersSlice.actions;
+export const { setComments, setErrorComments } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

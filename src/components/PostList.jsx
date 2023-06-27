@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Accordion from 'react-bootstrap/esm/Accordion';
 import Card from 'react-bootstrap/esm/Card';
 import { useDispatch, useSelector } from 'react-redux';

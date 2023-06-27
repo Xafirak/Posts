@@ -9,9 +9,6 @@ import Paginatior from './../components/Pagination';
 import Card from 'react-bootstrap/Card';
 import ErrorMessage from './../components/ErrorMessage';
 
-// Вопрос - надо ли  всю логику  писать в компонентах ()
-// (пример - Sorting или Search )  или нужно держать компоненты чистыми?
-
 const Posts = () => {
     const dispatch = useDispatch();
     const [posts, setPosts] = useState([]);

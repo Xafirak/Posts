@@ -35,7 +35,7 @@ const Search = ({ setPosts, setSortButtonName }) => {
     function clearInputHandler() {
         inputRef.current.value = '';
         setPosts(allPosts);
-        setSortButtonName('')
+        setSortButtonName('');
     }
 
     return (

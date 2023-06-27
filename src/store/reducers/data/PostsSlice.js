@@ -28,7 +28,6 @@ export const setSearchPosts = (payload) => ({
     type: 'SET_SEARCHED_POSTS',
     payload,
 });
-export const { setPosts, setIsLoadingPosts, setErrorPosts } =
-    postsSlice.actions;
+export const { setPosts, setErrorPosts } = postsSlice.actions;
 
 export default postsSlice.reducer;
